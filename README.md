@@ -1,6 +1,17 @@
-# Project #10 - Argent Bank API
+# Project #13 - Argent Bank API
 
-This codebase contains the code needed to run the backend for Argent Bank.
+This codebase contains the code needed to run the backend for Argent Bank. Use this link to visit the associated frontend : https://github.com/leoncik/LeonardWojcik_13_20072022
+
+## Table of contents
+
+-   [Getting Started](#getting-started)
+    -   [Prerequisites](#prerequisites)
+    -   [Instructions](#instructions)
+-   [Populated Database Data](#populated-database-data)
+    -   [Tony Stark](#tony-stark)
+    -   [Steve Rogers](#steve-rogers)
+-   [API Documentation](#api-documentation)
+-   [Design Assets](#design-assets)
 
 ## Getting Started
 
@@ -20,6 +31,8 @@ node --version
 # Check Mongo version
 mongo --version
 ```
+
+To switch between Node.js versions, I recommend using [Fast Node Manager](https://github.com/Schniz/fnm).
 
 ### Instructions
 
