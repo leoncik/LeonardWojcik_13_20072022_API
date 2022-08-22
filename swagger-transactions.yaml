@@ -34,7 +34,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /account/{accountId}/transactions:
+  /accounts/{accountId}/transactions:
     get:
       tags:
         - Account Module
@@ -64,13 +64,68 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Account not found
-  /account/{accountId}/transactions/{transactionID}:
+    post:
+      tags:
+        - Account Module
+      summary: Create a new transaction
+      description: Add a new transaction
+      operationId: addTransaction
+      parameters:
+        - name: accountId
+          in: path
+          type: string
+          description: ID of the selected account
+          required: true
+        - in: body
+          name: body
+          description: Transaction Payload
+          required: true
+          schema:
+            $ref: '#/definitions/NewTransaction'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction added successfully
+          schema:
+            $ref: '#/definitions/NewTransactionApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /accounts/{accountId}/transactions/{transactionID}:
+    get:
+        tags:
+          - Account Module
+        summary: Access a transaction by ID
+        description: Returns a transaction of an account
+        operationId: getTransactionById
+        parameters:
+          - name: accountId
+            in: path
+            type: string
+            description: ID of the selected account
+            required: true
+          - name: transactionID
+            in: path
+            type: string
+            description: ID of the selected transaction
+            required: true
+        responses:
+          '200':
+            description: successful operation
+            schema:
+              $ref: '#/definitions/Transaction'
+          '400':
+            description: Invalid ID supplied
+          '404':
+            description: Transaction not found
     put:
       security:
         - Bearer: []
       tags:
         - Account Module
-      summary: Account Transaction API
+      summary: Update a transaction by ID
       description: API for updating a transaction
       parameters:
         - name: accountId
@@ -105,6 +160,28 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+    delete:
+      tags:
+        - Account Module
+      summary: Delete a transaction by ID
+      description: API for deleting a transaction
+      operationId: deleteTransaction
+      parameters:
+        - name: accountId
+          in: path
+          type: string
+          description: ID of the selected account
+          required: true
+        - name: transactionID
+          in: path
+          type: string
+          description: ID of the transaction that needs to be deleted
+          required: true
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Transaction not found
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -126,6 +203,10 @@ definitions:
           email:
             type: string
   Transactions:
+    type: array
+    items:
+      $ref: '#/definitions/Transaction'
+  Transaction:
     type: object
     properties:
       transaction:
@@ -160,3 +241,29 @@ definitions:
         type: string
       notes:
         type: string
+  NewTransaction:
+    type: object
+    properties:
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: string
+      balance:
+        type: string
+      type:
+        type: string
+      category:
+        type: string
+      notes:
+        type: string
+  NewTransactionApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        $ref: '#/definitions/Transaction'
