@@ -48,8 +48,9 @@ paths:
         - in: query
           name: date
           type: string
-          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
-          description: Get the transactions of a month with param of the form "YYYT-MM-DD".
+          required: false
+          pattern: /([0-9]{4})-(?:[0-9]{2})/
+          description: Get the transactions of a month with param of the form "YYYY-MM".
       responses:
         '200':
           description: successful operation
