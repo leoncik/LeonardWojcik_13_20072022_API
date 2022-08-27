@@ -9,29 +9,6 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /user/profile:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: User Profile API (updated version)
-      description: API for fetching a user profile
-      parameters:
-        - in: header
-          type: string
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-      responses:
-        '200':
-          description: User profile retrieved successfully
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
   /accounts/{accountId}/transactions:
     get:
       tags:
@@ -184,20 +161,6 @@ securityDefinitions:
     name: Authorization
     in: header
 definitions:
-  ApiResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          id:
-            type: string
-          email:
-            type: string
   Transactions:
     type: array
     items:
